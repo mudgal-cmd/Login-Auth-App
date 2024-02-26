@@ -1,10 +1,17 @@
 const user = require("../mongo-database/schema/user");
+const {validationResult, matchedData} = require("express-validator");
 
-const authController = async (req, res) => { //because if async method 
+const authController = async (req, res) => { //because of async method 
 
-  const {body} = req;
+  const result = validationResult(req); //storing validaiton results in the "result" variable.
 
-  const userObj = new user(body); //created a new object of the USER model
+  if(!result.isEmpty()) return res.status(400).send(result.array()); //result.isEmpty() means there are no validation errors.
+
+  const data = matchedData(req);
+
+  console.log(data);
+
+  const userObj = new user(data); //created a new object of the USER model
 
   try {
     const savedUser = await userObj.save(); //this is an async method
