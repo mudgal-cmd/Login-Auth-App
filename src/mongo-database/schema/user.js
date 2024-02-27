@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
   address: mongoose.Schema.Types.Mixed,
-  userid : {
+  id : {
     type: mongoose.Schema.Types.Number,
-    required: true,
-    unique: true
   },
   email : mongoose.Schema.Types.String,
   username: {

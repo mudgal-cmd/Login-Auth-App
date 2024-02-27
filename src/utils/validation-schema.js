@@ -4,7 +4,7 @@ const validateSchema = {
     notEmpty : true,
     errorMessage : "User ID cannot be empty",
     
-  },
+  }, 
 
   username : {
     in: ['body'], //this means that the validation rules apply to parameters in the body. By using 'in' we tell express-validator to look for the specified field in the request body
