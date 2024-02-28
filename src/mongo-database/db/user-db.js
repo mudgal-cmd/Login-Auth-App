@@ -11,6 +11,7 @@ mongoose.connect("mongodb://localhost:27017/auth_database")
 userData().then(data => {
 
   data.forEach(async user => {
+    
     const newUser = new userModel(user);
 
     const saveUser = await newUser.save();
