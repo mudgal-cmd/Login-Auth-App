@@ -31,12 +31,23 @@ mongoose.connect("mongodb://localhost:27017/auth_database")
   .then(console.log("Connected to the MongoDB database"))
   .catch(err => console.log(`Error is ${err}`));
 
+//Endpoint to check if the user is logged in or not/ check user's session is active or not.
+
+app.get("/api/auth/status", (req, res)=>{
+  if(req.user) return res.status(200).send("User is logged in. You can proceed.");
+  return res.status(401).send("User not authenticated. Please login. ");
+});
+
 app.post("/api/auth/login", passport.authenticate("local"), (req, res)=>{
   console.log("Login successfull");
   res.send("Login successfull");
 });
 
+
+//Endpoint for new signup.
 app.use("/", checkSchema(validateSchema), router); //checkSchema is the middleware in the express-validator module, that is used to check and validate the schema.
+
+
 
 app.listen(5000, ()=>{
   console.log('Server is listening on port 5000...');
