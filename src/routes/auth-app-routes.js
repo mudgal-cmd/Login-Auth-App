@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authController = require('../controller/auth-app-controller');
 
-router.route("/api/adduser").post(authController);
+router.route("/api/user/signup").post(authController);
 
 console.log('I am in routes');
 

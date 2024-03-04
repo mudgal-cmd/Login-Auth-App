@@ -1,5 +1,6 @@
 const user = require("../mongo-database/schema/user");
 const {validationResult, matchedData} = require("express-validator");
+const hashPassword = require("../utils/helper");
 
 const authController = async (req, res) => { //because of async method 
 
@@ -7,7 +8,15 @@ const authController = async (req, res) => { //because of async method
 
   if(!result.isEmpty()) return res.status(400).send(result.array()); //result.isEmpty() means there are no validation errors.
 
+  // console.log(data);
+
+  // data.password
+
   const data = matchedData(req);
+
+  console.log(data);
+
+  data.password = hashPassword(data.password);
 
   console.log(data);
 
