@@ -38,14 +38,18 @@ app.get("/api/auth/status", (req, res)=>{
   return res.status(401).send("User not authenticated. Please login. ");
 });
 
-app.post("/api/auth/login", passport.authenticate("local"), (req, res)=>{
+//Endpoint for the user login
+app.post("/api/users/login", passport.authenticate("local"), (req, res)=>{
   console.log("Login successfull");
-  res.send("Login successfull");
+  // res.send("Login successfull");
+  // console.log(passport);
+  console.log(req.body);
+  res.status(200).json({"status": "success", "data": req.user});
 });
 
 
 //Endpoint for new signup.
-app.use("/", checkSchema(validateSchema), router); //checkSchema is the middleware in the express-validator module, that is used to check and validate the schema.
+app.use("/api/user", checkSchema(validateSchema), router); //checkSchema is the middleware in the express-validator module, that is used to check and validate the schema.
 
 
 

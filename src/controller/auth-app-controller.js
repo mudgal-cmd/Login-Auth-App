@@ -2,7 +2,7 @@ const user = require("../mongo-database/schema/user");
 const {validationResult, matchedData} = require("express-validator");
 const hashPassword = require("../utils/helper");
 
-const authController = async (req, res) => { //because of async method 
+const authSignUpController = async (req, res) => { //because of async method 
 
   const result = validationResult(req); //storing validaiton results in the "result" variable.
 
@@ -32,4 +32,4 @@ const authController = async (req, res) => { //because of async method
 
 }
 
-module.exports = authController;
+module.exports = authSignUpController;

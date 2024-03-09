@@ -24,10 +24,18 @@ passport.deserializeUser(async (id, done)=>{
 
 const strategyVerifyFunction = async (username, password, done) => {
 
+try{
   const findUser = await userModel.findOne({username});
+
+  if(!findUser) throw new Error("Error: User not found");
+
+  if(password !== findUser.password) throw new Error("Password does not match");
 
   done(null, findUser);
 
+}
+catch(err) {done(err, null);}
+  
 }
 
 const localStrategy = new Strategy(strategyVerifyFunction);
