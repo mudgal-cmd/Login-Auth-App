@@ -2,7 +2,7 @@ const user = require("../mongo-database/schema/user");
 const {validationResult, matchedData} = require("express-validator");
 const hashPassword = require("../utils/helper");
 
-const authSignUpController = async (req, res) => { //because of async method 
+const authSignUpController = async (req, res) => { //because of the async "save" method 
 
   const result = validationResult(req); //storing validaiton results in the "result" variable.
 
