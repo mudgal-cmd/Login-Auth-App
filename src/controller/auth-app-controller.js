@@ -32,4 +32,18 @@ const authSignUpController = async (req, res) => { //because of the async "save"
 
 }
 
-module.exports = authSignUpController;
+const fetchUserController = (req, res)=>{
+  console.log(req.session.id);
+  // if()
+  req.sessionStore.get(req.session.id, (err, sessionData)=>{
+    if(err) throw err;
+    else{
+      console.log("Inside Session Store");
+      console.log(sessionData);
+      if(!sessionData) return res.status(204).send("No session");
+      res.status(200).send("Welcome");
+    }
+  });
+}
+
+module.exports = {authSignUpController, fetchUserController};
